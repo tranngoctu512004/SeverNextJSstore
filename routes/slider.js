@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var SliderController = require('../modules/slider/sliderController');
+var SliderController = require('../modules/slider/SliderController');
 router.post('/getAll', async function (req, res) {
     try {
         const AllSlider = await SliderController.getAll();
