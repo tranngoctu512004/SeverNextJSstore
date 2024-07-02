@@ -15,6 +15,48 @@ router.post('/addProduct', async function (req, res) {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
-
 })
+router.post('/productsByCategory', async function (req, res) {
+    const { id } = req.body;
+    try {
+        const products = await ProductController.getByParentCategory(id);
+        res.status(200).json(products);
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({ error: error.message });
+        } else {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+});
+router.post('/productsDetail', async function (req, res) {
+    const { id } = req.body;
+    try {
+        const products = await ProductController.productDetail(id);
+        res.status(200).json(products);
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({ error: error.message });
+        } else {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+});
+router.post('/getAllProduct', async function (req, res) {
+    try {
+        const AllProduct = await ProductController.getAll();
+        res.status(200).json(AllProduct)
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({ error: error.message });
+        } else {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+}
+)
+
 module.exports = router;

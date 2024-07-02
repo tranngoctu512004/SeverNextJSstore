@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var requireToken = require('../MiddleWaves/AuthTokenRequired');
+
 var UserController = require('../modules/user/UserController')
 router.post('/register', async function (req, res) {
     const { name, email, password } = req.body;
@@ -36,4 +38,9 @@ router.post('/login', async (req, res) => {
         }
     }
 });
+router.get('/me', requireToken, (req, res) => {
+    res.send(req.user);
+});
+
+
 module.exports = router;
