@@ -1,4 +1,4 @@
-var SliderModule = require('./sliderModule');
+var SliderModule = require('./SliderModule');
 
 const getAll = async () => {
     try {
