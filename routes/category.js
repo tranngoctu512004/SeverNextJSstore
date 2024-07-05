@@ -1,12 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var CategoryController = require('../modules/category/CategoryController')
-var Categories = require('../modules/category/CategoryModule')
-router.post('/addCate', async function (req, res) {
+const express = require('express');
+const router = express.Router();
+const cache = require('memory-cache');
+const CategoryController = require('../modules/category/CategoryController');
+const { addCategoryValidator, validate } = require('../MiddleWaves/validator/cateValidators');
+const Categories = require('../modules/category/CategoryModule');
+const cacheMiddleware = require('../MiddleWaves/cache/CateCache');
+
+router.post('/addCate', addCategoryValidator, validate, async (req, res) => {
     const { cateID, cateName } = req.body;
     try {
         const category = await CategoryController.insert(cateID, cateName);
-        res.status(200).json(category)
+        res.status(200).json(category);
     } catch (error) {
         if (error.status) {
             res.status(error.status).json({ error: error.message });
@@ -16,10 +20,11 @@ router.post('/addCate', async function (req, res) {
         }
     }
 });
-router.post('/getAllCate', async function (req, res) {
+
+router.post('/getAllCate', async (req, res) => {
     try {
         const AllCategory = await CategoryController.getAll();
-        res.status(200).json(AllCategory)
+        res.status(200).json(AllCategory);
     } catch (error) {
         if (error.status) {
             res.status(error.status).json({ error: error.message });
@@ -28,9 +33,9 @@ router.post('/getAllCate', async function (req, res) {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
-}
-)
-router.post('/AllCategories', async (req, res) => {
+});
+
+router.post('/AllCategories', cacheMiddleware, async (req, res) => {
     try {
         const categories = await Categories.aggregate([
             {
@@ -42,9 +47,17 @@ router.post('/AllCategories', async (req, res) => {
                 }
             }
         ]);
+        cache.put('AllCategories', categories, 60 * 1000);
         res.send(categories);
+
     } catch (error) {
-        res.status(500).send(error);
+        if (error.status) {
+            res.status(error.status).json({ error: error.message });
+        } else {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 });
+
 module.exports = router;

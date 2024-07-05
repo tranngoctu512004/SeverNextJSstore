@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var SubCategoryController = require('../modules/subcategory/SubCategoryController')
-router.post('/addSubCate', async function (req, res) {
+var SubCategoryController = require('../modules/subcategory/SubCategoryController');
+const { addSubCateValidator, validate } = require('../MiddleWaves/validator/subcateValidator');
+router.post('/addSubCate', addSubCateValidator, validate, async function (req, res) {
     const { subcateID, subcateName, parentCategory } = req.body;
     try {
         const subcategory = await SubCategoryController.insert(subcateID, subcateName, parentCategory);

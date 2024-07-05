@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var SliderController = require('../modules/slider/SliderController');
+const { addSliderValidator, validate } = require('../MiddleWaves/validator/sliderValidators');
 router.post('/getAll', async function (req, res) {
     try {
         const AllSlider = await SliderController.getAll();
@@ -14,7 +15,7 @@ router.post('/getAll', async function (req, res) {
         }
     }
 })
-router.post('/addSlider', async function (req, res) {
+router.post('/addSlider', addSliderValidator, validate, async function (req, res) {
     const { image, path } = req.body;
     try {
         const newSiler = SliderController.insert(image, path)

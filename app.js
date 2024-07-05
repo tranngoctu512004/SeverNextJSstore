@@ -12,6 +12,7 @@ var sliderRouter = require('./routes/slider');
 var subcategoryRouter = require('./routes/subcategory');
 var requireToken = require('./MiddleWaves/AuthTokenRequired');
 var productRouter = require('./routes/product');
+var cartRouter = require('./routes/cart');
 var app = express();
 //connect database
 require('./db');
@@ -33,6 +34,7 @@ app.use('/cate', cateRouter);
 app.use('/subcate', subcategoryRouter);
 app.use('/slider', sliderRouter);
 app.use('/product', productRouter);
+app.use('/cart', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
