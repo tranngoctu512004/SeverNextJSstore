@@ -10,3 +10,5 @@ services:
       - '3500:3500'
     volumes:
       - ./.env:/app/.env
+    env_file:
+      - ./.env
