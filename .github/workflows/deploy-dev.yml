@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd projects/severNextJs
+            cd next-store-server
             sudo docker compose pull 
             sudo docker compose up -d 
             sudo docker image prune -f

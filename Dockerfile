@@ -1,6 +1,8 @@
 #* ✈️ Production 
 FROM node:20-alpine AS dev
 
+RUN npm install -g nodemon
+
 WORKDIR /app
 
 COPY package*.json .
@@ -11,6 +13,8 @@ COPY . .
 
 # Ensure has execute permission
 RUN chmod +x app.js
+
+USER node
 
 EXPOSE 4000
 
