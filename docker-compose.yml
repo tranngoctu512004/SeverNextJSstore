@@ -11,4 +11,5 @@ services:
     volumes:
       - ./.env:/app/.env
     env_file:
-      - ./.env  
+      - ./.env
+    command: npm run start  
