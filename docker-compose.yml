@@ -3,7 +3,9 @@ version: '3.8'
 services:
   next-store-server:
     image: trantu30950/next-store-server:latest
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: next-store-server
     restart: always
     ports:
