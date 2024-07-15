@@ -14,7 +14,7 @@ COPY . .
 # Ensure has execute permission
 RUN chmod +x app.js
 
-USER node
+USER root
 
 RUN chown -R node:node /app/node_modules
 
