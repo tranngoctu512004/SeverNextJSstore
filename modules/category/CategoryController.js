@@ -1,4 +1,5 @@
 var categoryModule = require('./CategoryModule')
+var subCateModule = require('../subcategory/SubCategoryModule')
 
 const insert = async (cateID, cateName) => {
     try {
@@ -35,4 +36,16 @@ const remove = async (CateID) => {
 //         throw error;
 //     }
 // }
-module.exports = { insert, getAll, remove };
+const getByCateID = async (CateID) => {
+    try {
+        let getCate = await categoryModule.find({ _id: CateID });
+        if (!getCate.length) {
+            getCate = await subCateModule.find({ _id: CateID });
+        }
+        return getCate;
+    } catch (error) {
+        throw error;
+    }
+
+}
+module.exports = { insert, getAll, remove, getByCateID };

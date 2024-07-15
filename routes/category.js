@@ -59,5 +59,19 @@ router.post('/AllCategories', cacheMiddleware, async (req, res) => {
         }
     }
 });
+router.post('/getCateByID', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const cate = await CategoryController.getByCateID(id);
+        res.status(200).json(cate);
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json({ error: error.message });
+        } else {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+})
 
 module.exports = router;

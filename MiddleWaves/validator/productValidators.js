@@ -6,7 +6,6 @@ const addProductValidator = [
     body('attribute').notEmpty().withMessage('Thuộc tính sản phẩm không được để trống'),
     body('price').notEmpty().withMessage('Giá sản phẩm không được để trống').isNumeric().withMessage('Giá sản phẩm phải là số'),
     body('size').notEmpty().withMessage('Kích cỡ sản phẩm không được để trống'),
-    body('sizeUser').notEmpty().withMessage('Kích cỡ người dùng không được để trống'),
     body('color').notEmpty().withMessage('Màu sắc sản phẩm không được để trống'),
     body('productDescription').notEmpty().withMessage('Mô tả sản phẩm không được để trống'),
     body('parentCategory').notEmpty().withMessage('Danh mục cha không được để trống'),

@@ -23,8 +23,6 @@ const insert = async (image, name, attribute, price, size, sizeUser, color, prod
 const getByParentCategory = async (parentCategory) => {
     try {
         let products = await ProductModule.find({ parentCategory: parentCategory });
-
-        // Nếu không tìm thấy sản phẩm theo parentCategory, tìm theo subParentCategory
         if (products.length === 0) {
             products = await ProductModule.find({ subParentCategory: parentCategory });
         }
