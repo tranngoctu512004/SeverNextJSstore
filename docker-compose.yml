@@ -11,5 +11,4 @@ services:
     volumes:
       - ./.env:/app/.env
     env_file:
-      - ./.env
-    command: npm run dev  
+      - ./.env  
