@@ -16,6 +16,8 @@ RUN chmod +x app.js
 
 USER node
 
+RUN npm rebuild bcrypt --build-from-source
+
 EXPOSE 4000
 
 CMD [ "npm", "run", "dev" ]
