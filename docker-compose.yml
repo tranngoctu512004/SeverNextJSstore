@@ -7,7 +7,7 @@ services:
     container_name: next-store-server
     restart: always
     ports:
-      - '3500:3500'
+      - '4000:4000'
     volumes:
       - ./.env:/app/.env
     env_file:
