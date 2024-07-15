@@ -12,4 +12,4 @@ services:
       - ./.env:/app/.env
     env_file:
       - ./.env
-    command: npm run start  
+    command: npm run dev  
