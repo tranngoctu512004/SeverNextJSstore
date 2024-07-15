@@ -9,6 +9,8 @@ RUN npm install --only=production
 
 COPY . .
 
+RUN chmod +x index.js
+
 EXPOSE 3500
 
 CMD [ "npm", "run", "dev" ]
