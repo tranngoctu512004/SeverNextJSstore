@@ -9,8 +9,8 @@ RUN npm install --only=production
 
 COPY . .
 
-# Ensure index.js has execute permission
-RUN chmod +x index.js
+# Ensure has execute permission
+RUN chmod +x app.js
 
 EXPOSE 4000
 
