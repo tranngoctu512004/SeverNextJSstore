@@ -32,6 +32,11 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/next-store-server:latest
           target: dev
 
+      - name: Debug SSH connection
+        run: |
+          echo "Checking SSH connection to ${{ secrets.SERVER_HOST }} on port ${{ secrets.SERVER_PORT }}..."
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_PORT }} exit
+
       - name: SSH into Server
         uses: appleboy/ssh-action@v0.1.0
         with:
