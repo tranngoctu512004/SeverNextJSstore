@@ -11,7 +11,6 @@ RUN npm install
 
 COPY . .
 
-# Ensure has execute permission
 RUN chmod +x app.js
 
 USER root
